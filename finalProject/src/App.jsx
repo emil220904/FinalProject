@@ -13,22 +13,32 @@ function App() {
   return (
     <AuthProvider>
       <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/add" element={
-            <PrivateRoute>
-              <AddGame />
-            </PrivateRoute>
-          } />
-          <Route path="/edit/:id" element={
-            <PrivateRoute>
-              <EditGame />
-            </PrivateRoute>
-          } />
-        </Routes>
+        <div className="navbar-wrapper">
+          <Navbar />
+        </div>
+        <div className="content-wrapper">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
+            <Route
+              path="/add"
+              element={
+                <PrivateRoute>
+                  <AddGame />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="/edit/:id"
+              element={
+                <PrivateRoute>
+                  <EditGame />
+                </PrivateRoute>
+              }
+            />
+          </Routes>
+        </div>
       </BrowserRouter>
     </AuthProvider>
   );

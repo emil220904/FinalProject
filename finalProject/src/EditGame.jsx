@@ -1,7 +1,6 @@
-// src/pages/EditGame.jsx
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { getGame, updateGame } from "./api";
+
 
 export default function EditGame() {
   const { id } = useParams();

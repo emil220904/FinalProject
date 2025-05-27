@@ -3,16 +3,16 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Login() {
-  const [email, setEmail] = useState("");
+  const [loginInput, setLoginInput] = useState("");
   const [password, setPassword] = useState("");
   const { login } = useAuth();
   const navigate = useNavigate();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Симулиран вход
-    if (email && password) {
-      login({ email });
+    if (loginInput && password) {
+    
+      login({ login: loginInput });
       navigate("/");
     }
   };
@@ -20,8 +20,20 @@ export default function Login() {
   return (
     <form onSubmit={handleSubmit}>
       <h2>Вход</h2>
-      <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Имейл" required />
-      <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Парола" required />
+      <input
+        type="text"
+        value={loginInput}
+        onChange={(e) => setLoginInput(e.target.value)}
+        placeholder="Имейл или потребителско име"
+        required
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Парола"
+        required
+      />
       <button type="submit">Влез</button>
     </form>
   );
