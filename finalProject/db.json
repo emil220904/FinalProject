@@ -1,46 +1,35 @@
 {
   "games": [
     {
-      "id": "b03b",
-      "title": "Battlefield 2042",
-      "genre": "Casual, Shooter, Adventure, Action",
-      "platform": "PC, PlayStation 5, Xbox One, PlayStation 4, Xbox Series S/X",
+      "id": "813c",
+      "title": "Bleach: Brave Souls",
+      "genre": "Action, RPG",
+      "platform": "PC, PlayStation 4, iOS, Android",
+      "date": "2025-04-29",
+      "rating": "5",
+      "comment": "",
+      "image": "https://media.rawg.io/media/games/081/081a4ed8d38ae678cf79b60491d2da2b.jpg"
+    },
+    {
+      "id": "1bb6",
+      "title": "Counter-Strike 2",
+      "genre": "Shooter",
+      "platform": "PC, Linux",
       "date": "2025-05-15",
-      "rating": "2",
+      "rating": "",
       "comment": "",
-      "image": "https://media.rawg.io/media/games/af2/af2b640fa820e8a8135948a4cd399539.jpg"
+      "image": "https://media.rawg.io/media/games/ec4/ec4b02bdb3eb5c6212992c19bc05697e.jpg"
     },
     {
-      "id": "9164",
-      "title": "EA SPORTS FC 24",
-      "genre": "Casual, Simulation, Sports",
-      "platform": "PC, PlayStation 5, PlayStation 4, Xbox Series S/X, Nintendo Switch",
-      "date": "2025-05-07",
-      "rating": "5",
+      "id": "1c47",
+      "title": "Counter-Strike: Global Offensive",
+      "genre": "Shooter",
+      "platform": "PC, Linux, Xbox 360, PlayStation 3",
+      "date": "2025-05-06",
+      "rating": 8,
       "comment": "",
-      "image": "https://media.rawg.io/media/games/104/10404407d458d90f4559a1f587c2650a.jpg"
-    },
-    {
-      "id": "f21e",
-      "title": "Project-Andr-34",
-      "genre": "Platformer",
-      "platform": "PC",
-      "date": "0005-03-04",
-      "rating": "5",
-      "comment": "",
-      "image": "https://media.rawg.io/media/screenshots/bce/bcee1c9e3b755db1989139445231dd86.jpg"
-    },
-    {
-      "id": "6406",
-      "title": "FAS: Fight Action Sandbox",
-      "genre": "Strategy, Indie, Action, Simulation",
-      "platform": "PC",
-      "startDate": "2025-05-27",
-      "endDate": "2025-05-27",
-      "status": "played",
-      "rating": "6",
-      "comment": "",
-      "image": "https://media.rawg.io/media/screenshots/166/1667858c698e34ebc693d6c6cc346b54.jpg"
+      "image": "https://media.rawg.io/media/games/736/73619bd336c894d6941d926bfd563946.jpg",
+      "status": "played"
     }
   ]
 }

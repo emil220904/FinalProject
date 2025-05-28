@@ -1,19 +1,25 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
 export default function Login() {
-  const [loginInput, setLoginInput] = useState("");
-  const [password, setPassword] = useState("");
+  const [credentials, setCredentials] = useState({ email: "", password: "" });
   const { login } = useAuth();
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setCredentials((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (loginInput && password) {
-    
-      login({ login: loginInput });
+    try {
+      await login(credentials);
       navigate("/");
+    } catch (err) {
+      alert("Грешка при вход.");
+      console.error(err);
     }
   };
 
@@ -21,20 +27,26 @@ export default function Login() {
     <form onSubmit={handleSubmit}>
       <h2>Вход</h2>
       <input
-        type="text"
-        value={loginInput}
-        onChange={(e) => setLoginInput(e.target.value)}
-        placeholder="Имейл или потребителско име"
+        type="email"
+        name="email"
+        value={credentials.email}
+        onChange={handleChange}
+        placeholder="Имейл"
         required
       />
       <input
         type="password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
+        name="password"
+        value={credentials.password}
+        onChange={handleChange}
         placeholder="Парола"
         required
       />
       <button type="submit">Влез</button>
+
+      <p style={{ marginTop: "1rem" }}>
+        Нямаш профил? <Link to="/register">Регистрация</Link>
+      </p>
     </form>
   );
 }

@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "./AuthContext";
 
- function Navbar() {
+function Navbar() {
   const { user, logout } = useAuth();
 
   return (
@@ -13,10 +13,7 @@ import { useAuth } from "./AuthContext";
           <button onClick={logout}>Изход</button>
         </>
       ) : (
-        <>
-          <Link to="/login">Вход</Link>
-          <Link to="/register">Регистрация</Link>
-        </>
+        <Link to="/login">Вход</Link>
       )}
     </nav>
   );
