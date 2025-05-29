@@ -103,7 +103,7 @@ const handleSubmit = async (e) => {
     
     navigate("/");
   } catch (err) {
-    console.error("Грешка при запис:", err);
+    console.error("Грешка при запис: ", err);
     alert("Възникна грешка при добавянето на играта.");
   }
 };

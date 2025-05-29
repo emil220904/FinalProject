@@ -18,7 +18,7 @@ export default function Login() {
     if (success) {
       navigate("/");
     } else {
-      alert("Невалиден имейл или парола.");
+      alert("Невалиден имейл или парола. ");
     }
   };
 

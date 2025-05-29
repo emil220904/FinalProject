@@ -14,7 +14,7 @@ export default function BrowseGames() {
         const res = await axios.get(`https://api.rawg.io/api/games?key=${API_KEY}&page_size=20`);
         setGames(res.data.results);
       } catch (err) {
-        console.error("Грешка при зареждане на игри:", err);
+        console.error("Грешка при зареждане на игри: ", err);
       }
     };
 

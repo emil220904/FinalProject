@@ -11,7 +11,7 @@ import BrowseGames from "./BrowseGame";
 import axios from "axios";
 import "./App.css";
 
-axios.defaults.baseURL = "http://localhost:5000";  // Сървърът е на порт 5000
+axios.defaults.baseURL = "http://localhost:5000"; 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 
 function App() {
