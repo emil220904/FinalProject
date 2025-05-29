@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": "e2f5",
+      "email": "emil22090@gmail.com",
+      "password": "emil20422",
+      "createdAt": "2025-05-29T17:32:58.393Z"
+    },
+    {
+      "id": "b782",
+      "email": "1234@gmail.com",
+      "password": "emeca123",
+      "createdAt": "2025-05-29T17:33:39.820Z"
+    }
+  ],
+  "games": [
+    {
+      "id": "5999",
+      "title": "Data Jammers: FastForward",
+      "genre": "Indie, Action",
+      "platform": "PC, macOS",
+      "date": "2025-05-05",
+      "rating": 6,
+      "comment": "",
+      "image": "https://media.rawg.io/media/screenshots/a5e/a5e7f0266ff8d571073d697ed4cb8dca.jpg",
+      "status": "played",
+      "userId": "e2f5"
+    },
+    {
+      "id": "a70b",
+      "title": "Das Fron - Tier Festival",
+      "genre": "Platformer",
+      "platform": "PC",
+      "date": "2025-05-07",
+      "rating": 6,
+      "comment": "",
+      "image": "https://media.rawg.io/media/screenshots/577/57746ef98159e69258c1e26e9c95eca9.jpg",
+      "status": "played",
+      "userId": "b782"
+    }
+  ]
+}
