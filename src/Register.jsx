@@ -61,7 +61,7 @@ export default function Register() {
     setError(
       err.response?.data?.message || 
       err.message || 
-      "Грешка в мрежовата връзка. Проверете интернета и опитайте отново."
+      "Проверете интернета и опитайте отново."
     );
   }
 };

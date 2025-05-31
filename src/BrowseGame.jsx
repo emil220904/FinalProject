@@ -51,7 +51,7 @@ export default function BrowseGames() {
               Платформа:{" "}
               {game.platforms && game.platforms.length > 0
                 ? game.platforms.map((p) => p.platform.name).join(", ")
-                : "Няма информация"}
+                : "Няма информация "}
             </p>
             <p>Дата: {game.released || "Неизвестна"}</p>
           </div>

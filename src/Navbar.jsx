@@ -3,7 +3,6 @@ import { useAuth } from "./AuthContext";
 
 function Navbar() {
   const { user, logout } = useAuth();
-
   return (
     <nav>
       <Link to="/">MyGameLog</Link>

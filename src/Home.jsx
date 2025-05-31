@@ -25,7 +25,7 @@ export default function Home() {
       await deleteGame(id);
       loadGames();
     } catch (err) {
-      console.error("Грешка при изтриване:", err);
+      console.error("Грешка при изтриване: ", err);
     }
   };
 

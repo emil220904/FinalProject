@@ -13,11 +13,13 @@ export const AuthProvider = ({ children }) => {
     console.log('Отговор от сървър:', res.data);
     
     const foundUser = res.data[0];
+    
     if (foundUser) {
       console.log('Намерен потребител:', foundUser);
       setUser(foundUser);
       return true;
     }
+
     console.log('Потребител не е намерен');
     return false;
   } catch (err) {

@@ -18,6 +18,7 @@ export default function GameCard({ game, onDelete }) {
     }
   };
 
+  
   return (
     <div className="game-card">
       {game.image && <img src={game.image} alt={game.title} className="game-image" />}

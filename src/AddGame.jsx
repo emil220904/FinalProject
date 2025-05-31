@@ -77,7 +77,7 @@ const handleSubmit = async (e) => {
   e.preventDefault();
   
   if (!user?.id) {
-    alert("Трябва да сте влезли в системата, за да добавяте игри!");
+    alert("Трябва да сте влезли в системата, за да добавяте игри! ");
     return;
   }
 
