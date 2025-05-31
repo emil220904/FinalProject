@@ -3,8 +3,12 @@
     {
       "id": "e2f5",
       "email": "emil22090@gmail.com",
-      "password": "emil20422",
-      "createdAt": "2025-05-29T17:32:58.393Z"
+      "password": "emil200422"
+    },
+    {
+      "id": "d518",
+      "email": "1234@gmail.com",
+      "password": "emil200422"
     }
   ],
   "games": [
@@ -19,7 +23,20 @@
       "image": "https://media.rawg.io/media/screenshots/a5e/a5e7f0266ff8d571073d697ed4cb8dca.jpg",
       "status": "played",
       "userId": "e2f5"
+    },
+    {
+      "id": "6764",
+      "title": "League of Legends: Wild Rift",
+      "genre": "Strategy, Action",
+      "platform": "iOS, Android",
+      "date": "",
+      "rating": 6,
+      "comment": "",
+      "image": "https://media.rawg.io/media/games/3c7/3c773379b9a4161528bf12a2c9346e93.jpg",
+      "status": "played",
+      "startDate": "2025-05-05",
+      "endDate": "2025-05-30",
+      "userId": "e2f5"
     }
-
   ]
 }

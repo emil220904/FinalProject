@@ -8,18 +8,16 @@ export const AuthProvider = ({ children }) => {
 
  const login = async ({ email, password }) => {
   try {
-    console.log('Опит за влизане с: ', { email, password });
+    console.log('Опит за влизане с:', { email, password });
     const res = await axios.get(`/users?email=${email}&password=${password}`);
     console.log('Отговор от сървър:', res.data);
     
     const foundUser = res.data[0];
-    
     if (foundUser) {
       console.log('Намерен потребител:', foundUser);
       setUser(foundUser);
       return true;
     }
-
     console.log('Потребител не е намерен');
     return false;
   } catch (err) {

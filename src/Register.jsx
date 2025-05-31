@@ -13,44 +13,38 @@ export default function Register() {
   const validatePassword = (pwd) => {
     const hasLetter = /[a-zA-Z]/.test(pwd);
     const hasNumber = /[0-9]/.test(pwd);
-    const onlyLettersAndNumbers = /^[a-zA-Z0-9]+$/.test(pwd);
     const minLength = pwd.length >= 7;
-    return hasLetter && hasNumber && onlyLettersAndNumbers && minLength;
+    return hasLetter && hasNumber && minLength;
   };
 
   const handleSubmit = async (e) => {
   e.preventDefault();
 
-  // Валидация на парола
   if (!validatePassword(password)) {
-    setError("Паролата трябва да съдържа поне една буква, една цифра и да бъде поне 7 символа ");
+    setError("Паролата трябва да съдържа поне една буква, една цифра и да бъде поне 7 символа");
     return;
   }
 
   try {
-    // 1. Проверка за съществуващ потребител
-    const checkRes = await axios.get(`http://localhost:5000/users?email=${encodeURIComponent(email)}`);
+    const checkRes = await axios.get(`/users?email=${encodeURIComponent(email)}`);
     
     if (checkRes.data && checkRes.data.length > 0) {
       setError("Потребител с този имейл вече съществува.");
       return;
     }
 
-    // 2. Регистрация на нов потребител
     const newUser = { 
       email, 
-      password,
-      createdAt: new Date().toISOString() // Добавяне на timestamp
+      password
     };
     
-    const registerRes = await axios.post("http://localhost:5000/users", newUser);
+    const registerRes = await axios.post("/users", newUser);
     console.log('Успешна регистрация:', registerRes.data);
 
-    // 3. Автоматичен логин след регистрация
-    const loginResponse = await axios.get(`http://localhost:5000/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
+    const loginResponse = await axios.get(`/users?email=${encodeURIComponent(email)}&password=${encodeURIComponent(password)}`);
     
     if (loginResponse.data && loginResponse.data.length > 0) {
-      login(loginResponse.data[0]); // Предаваме целия потребителски обект
+      login(loginResponse.data[0]);
       navigate("/");
     } else {
       throw new Error("Влизането след регистрация неуспешно");
@@ -61,7 +55,7 @@ export default function Register() {
     setError(
       err.response?.data?.message || 
       err.message || 
-      "Проверете интернета и опитайте отново."
+      "Грешка в мрежовата връзка. Проверете интернета и опитайте отново."
     );
   }
 };

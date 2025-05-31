@@ -3,6 +3,7 @@ import { useAuth } from "./AuthContext";
 
 function Navbar() {
   const { user, logout } = useAuth();
+
   return (
     <nav>
       <Link to="/">MyGameLog</Link>
@@ -13,7 +14,7 @@ function Navbar() {
           <button onClick={logout}>Изход</button>
         </>
       ) : (
-        <Link to="/login">Вход</Link>
+        <Link to="/login">Вход </Link>
       )}
     </nav>
   );

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { addGame } from "./api";
@@ -15,14 +14,18 @@ export default function AddGame() {
     comment: "",
     image: "",
     status: "",
+    startDate: "",
+    endDate: ""
   });
+
   const [suggestions, setSuggestions] = useState([]);
   const navigate = useNavigate();
   const location = useLocation();
+  const [showStartDate, setShowStartDate] = useState(false);
+  const [showEndDate, setShowEndDate] = useState(false);
 
   const API_KEY = "c49d21c946b545d5b6538aa9ec1046ed";
 
-  
   useEffect(() => {
     const selected = location.state?.game;
     if (selected) {
@@ -40,7 +43,7 @@ export default function AddGame() {
     if (!query) return setSuggestions([]);
     try {
       const res = await axios.get(
-        `https://api.rawg.io/api/games?search=${query}&page_size=5&key=${API_KEY}`
+        `https://api.rawg.io/api/games?search=${query}&page_size=15&key=${API_KEY}`
       );
       setSuggestions(res.data.results);
     } catch (err) {
@@ -51,17 +54,32 @@ export default function AddGame() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setGame((prev) => ({ ...prev, [name]: value }));
-    if (name === "title") fetchSuggestions(value);
+
+    if (name === "title") {
+      fetchSuggestions(value);
+    }
+
+    if (name === "status") {
+      const shouldShow = ["played", "completed"].includes(value);
+      setShowStartDate(shouldShow);
+      setShowEndDate(shouldShow);
+
+      setGame((prev) => ({
+        ...prev,
+        startDate: shouldShow ? prev.startDate : "",
+        endDate: shouldShow ? prev.endDate : "",
+      }));
+    }
   };
 
   const handleSelect = (selectedGame) => {
-    setGame({
-      ...game,
+    setGame((prev) => ({
+      ...prev,
       title: selectedGame.name,
       genre: selectedGame.genres?.map((g) => g.name).join(", ") || "",
       platform: selectedGame.platforms?.map((p) => p.platform.name).join(", ") || "",
       image: selectedGame.background_image || "",
-    });
+    }));
     setSuggestions([]);
   };
 
@@ -69,66 +87,61 @@ export default function AddGame() {
     setGame((prev) => ({ ...prev, rating: value }));
   };
 
+  const { user } = useAuth();
 
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-const { user } = useAuth(); 
+    try {
+      const gameToAdd = {
+        ...game,
+        userId: user.id
+      };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
-  
-  if (!user?.id) {
-    alert("Трябва да сте влезли в системата, за да добавяте игри! ");
-    return;
-  }
+      await addGame(gameToAdd);
+      alert("Играта е добавена успешно!");
 
-  try {
-    const gameToAdd = {
-      ...game,
-      userId: user.id
-    };
+      setGame({
+        title: "",
+        genre: "",
+        platform: "",
+        date: "",
+        rating: "",
+        comment: "",
+        image: "",
+        status: "",
+        startDate: "",
+        endDate: ""
+      });
 
-    await addGame(gameToAdd);
-    alert("Играта е добавена успешно!");
-    
-    setGame({ 
-      title: "",
-      genre: "",
-      platform: "",
-      date: "",
-      rating: "",
-      comment: "",
-      image: "",
-      status: ""
-    });
-    
-    navigate("/");
-  } catch (err) {
-    console.error("Грешка при запис: ", err);
-    alert("Възникна грешка при добавянето на играта.");
-  }
-};
-
-
+      navigate("/");
+    } catch (err) {
+      console.error("Грешка при запис:", err);
+      alert("Възникна грешка при добавянето на играта.");
+    }
+  };
 
   return (
     <form onSubmit={handleSubmit}>
-      <label>Име на игра</label>
-      <input
-        name="title"
-        value={game.title}
-        onChange={handleChange}
-        placeholder="Търси игра..."
-        autoComplete="off"
-      />
-      {suggestions.length > 0 && (
-        <ul className="suggestion-box">
-          {suggestions.map((s) => (
-            <li key={s.id} onClick={() => handleSelect(s)}>
-              {s.name} ({s.released})
-            </li>
-          ))}
-        </ul>
-      )}
+  <label>Име на игра</label>
+  <div className="input-wrapper">
+    <input
+      name="title"
+      value={game.title}
+      onChange={handleChange}
+      placeholder="Търси игра..."
+      autoComplete="off"
+    />
+    {suggestions.length > 0 && (
+      <ul className="suggestion-box">
+        {suggestions.map((s) => (
+          <li key={s.id} onClick={() => handleSelect(s)}>
+            {s.name} ({s.released})
+          </li>
+        ))}
+      </ul>
+    )}
+  </div>
 
       <label>Жанр</label>
       <input name="genre" value={game.genre} readOnly />
@@ -143,24 +156,53 @@ const handleSubmit = async (e) => {
         </option>
         <option value="playing">Играе се в момента</option>
         <option value="played">Изиграна</option>
+        <option value="completed">Превъртяна</option>
         <option value="wishlist">Предстои да се играе</option>
       </select>
 
-      <label>Дата на изиграване</label>
-      <input type="date" name="date" value={game.date} onChange={handleChange} required />
+      {showStartDate && (
+        <>
+          <label>Начална дата</label>
+          <input
+            type="date"
+            name="startDate"
+            value={game.startDate}
+            onChange={handleChange}
+            required
+          />
+        </>
+      )}
 
-      <label>Оценка</label>
-      <div className="stars">
-        {[1, 2, 3, 4, 5].map((n) => (
-          <span
-            key={n}
-            style={{ cursor: "pointer", color: n <= Math.round(game.rating / 2) ? "gold" : "#777" }}
-            onClick={() => handleRatingClick(n * 2)}
-          >
-            ★
-          </span>
-        ))}
-      </div>
+      {showEndDate && (
+        <>
+          <label>Крайна дата (завършване)</label>
+          <input
+            type="date"
+            name="endDate"
+            value={game.endDate}
+            onChange={handleChange}
+            required={game.status === "completed"}
+            min={game.startDate}
+          />
+        </>
+      )}
+
+     <label>Оценка</label>
+<div className="stars" style={{ fontSize: "20px" }}>
+  {[1, 2, 3, 4, 5].map((n) => (
+    <i
+      key={n}
+      className={n <= Math.round(game.rating / 2) ? "fas fa-star" : "far fa-star"}
+      style={{
+        cursor: "pointer",
+        color: n <= Math.round(game.rating / 2) ? "#f5c518" : "#777",
+        marginRight: "10px"
+      }}
+      onClick={() => handleRatingClick(n * 2)}
+    />
+  ))}
+</div>
+
 
       <label>Коментар</label>
       <textarea name="comment" value={game.comment} onChange={handleChange} />

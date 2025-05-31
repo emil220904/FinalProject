@@ -7,6 +7,5 @@ const getGames = () => axios.get(API_URL);
 const addGame = (game) => axios.post(API_URL, game);
 const deleteGame = (id) => axios.delete(`${API_URL}/${id}`);
 const getGame = (id) => axios.get(`${API_URL}/${id}`);
-const updateGame = (id, game) => axios.put(`${API_URL}/${id}`, game);
 
-export { getGames, addGame, deleteGame, getGame, updateGame };
+export { getGames, addGame, deleteGame, getGame,};

@@ -12,7 +12,7 @@ export default function Home() {
     const res = await getGames();
     if (user) {
       const userGames = res.data.filter(game => game.userId === user.id);
-      console.log("Филтрирани игри: ", userGames); 
+      console.log("Филтрирани игри:", userGames); 
       setGames(userGames);
     }
   } catch (err) {
@@ -25,7 +25,7 @@ export default function Home() {
       await deleteGame(id);
       loadGames();
     } catch (err) {
-      console.error("Грешка при изтриване: ", err);
+      console.error("Грешка при изтриване:", err);
     }
   };
 
@@ -45,11 +45,13 @@ export default function Home() {
       {games.length === 0 ? (
         <p style={{ textAlign: "center" }}>Няма добавени игри.</p>
       ) : (
+    <div className="home">
         <div className="game-grid">
           {games.map((game) => (
             <GameCard key={game.id} game={game} onDelete={handleDelete} />
           ))}
         </div>
+    </div>
       )}
     </main>
   );

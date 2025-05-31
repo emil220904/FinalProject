@@ -4,12 +4,12 @@ import Login from "./Login";
 import Register from "./Register";
 import Home from "./Home";
 import AddGame from "./AddGame";
-import EditGame from "./EditGame";
 import PrivateRoute from "./PrivateRoute";
 import { AuthProvider } from "./AuthContext";
 import BrowseGames from "./BrowseGame";
 import axios from "axios";
-import "./App.css";
+import "./App.css" ;
+import '@fortawesome/fontawesome-free/css/all.min.css';
 
 axios.defaults.baseURL = "http://localhost:5000"; 
 axios.defaults.headers.post["Content-Type"] = "application/json";
@@ -31,17 +31,10 @@ function App() {
               </PrivateRoute>
             }
           />
-          <Route
-            path="/edit/:id"
-            element={
-              <PrivateRoute>
-                <EditGame />
-              </PrivateRoute>
-            }
-          />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
   );
 }
+
 export default App;
