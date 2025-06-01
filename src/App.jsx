@@ -11,6 +11,7 @@ import axios from "axios";
 import "./App.css" ;
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+
 axios.defaults.baseURL = "http://localhost:5000"; 
 axios.defaults.headers.post["Content-Type"] = "application/json";
 

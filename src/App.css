@@ -404,16 +404,11 @@ form button:hover {
   background: none;
   border: none;
   color: #fff;
-  font-size: 1.5rem;
+  font-size: 1rem;
   cursor: pointer;
   z-index: 10;
 }
 
-.loading-spinner {
-  padding: 3rem;
-  text-align: center;
-  font-size: 1.2rem;
-}
 
 .game-header {
   display: flex;

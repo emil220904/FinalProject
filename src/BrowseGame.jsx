@@ -2,13 +2,13 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "./AuthContext";
+
 const API_KEY = "c49d21c946b545d5b6538aa9ec1046ed";
 
 export default function BrowseGames() {
   const [games, setGames] = useState([]);
   const [selectedGame, setSelectedGame] = useState(null);
   const [gameDetails, setGameDetails] = useState(null);
-  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
 
@@ -34,7 +34,6 @@ export default function BrowseGames() {
   }, []);
 
   const fetchGameDetails = async (id) => {
-    setLoading(true);
     try {
       const res = await axios.get(
         `https://api.rawg.io/api/games/${id}?key=${API_KEY}`
@@ -43,7 +42,6 @@ export default function BrowseGames() {
     } catch (err) {
       console.error("Грешка при зареждане на детайли:", err);
     } finally {
-      setLoading(false);
     }
   };
 
@@ -121,14 +119,8 @@ export default function BrowseGames() {
         <div className={`game-details-modal ${gameDetails ? "show" : ""}`}>
           <div className="game-details-content">
             <button className="close-btn" onClick={closeDetails}>
-              X
-            </button>
-            
-            {loading ? (
-              <div className="loading-spinner">
-                <i className="fas fa-spinner fa-spin"></i> Зареждане...
-              </div>
-            ) : (
+              <i class="fas fa-xmark"></i>
+            </button>            
               <>
                 <div className="game-header">
                   <div className="game-cover">
@@ -203,7 +195,7 @@ export default function BrowseGames() {
                   
                 </div>
               </>
-            )}
+            
           </div>
         </div>
       )}
